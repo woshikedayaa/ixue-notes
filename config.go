@@ -15,10 +15,11 @@ type Config struct {
 	User   user   `yaml:"user"`
 	Target target `yaml:"target"`
 
-	AutoVerify  bool   `yaml:"auto-verify"`
-	HttpTimeOut int    `yaml:"http-timeout"`
-	BaseUrl     string `yaml:"base-url"`
-	AppID       string `yaml:"app-id"`
+	AutoVerify     bool   `yaml:"auto-verify"`
+	VerifyTryCount int    `yaml:"verify-try-count"`
+	HttpTimeOut    int    `yaml:"http-timeout"`
+	BaseUrl        string `yaml:"base-url"`
+	AppID          string `yaml:"app-id"`
 }
 
 type user struct {

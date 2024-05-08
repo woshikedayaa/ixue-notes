@@ -16,6 +16,7 @@ pallzVkuwRKydek3V9ufPpZEEH4eBgInMSDiMsggTWxcI/Lvag6eHjkSc67RTrj9
 -----END PUBLIC KEY-----`)
 
 func RSAEncrypt(origData []byte) ([]byte, error) {
+	// 加密只有登陆用 就不注意效率了
 	block, _ := pem.Decode(publicKey)
 	if block == nil {
 		return nil, errors.New("public key error")
