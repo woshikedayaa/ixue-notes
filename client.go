@@ -8,10 +8,15 @@ import (
 
 var client *internal.HttpClientWrapper
 
+var csrf = ""
+var vpappSession = ""
+
 func HttpClientInit() {
 	hpc := http.Client{
-		Transport: nil,
-		Timeout:   time.Duration(config.HttpTimeOut) * time.Second,
+		Transport: &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+		},
+		Timeout: time.Duration(config.HttpTimeOut) * time.Second,
 	}
 
 	client = internal.NewHttpClientWrapper(&hpc)

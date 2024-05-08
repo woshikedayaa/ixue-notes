@@ -11,6 +11,8 @@ import (
 //go:embed config_full.yaml
 var configExampleFUll string
 
+var baseURL = "app.readoor.cn"
+
 type Config struct {
 	User   user   `yaml:"user"`
 	Target target `yaml:"target"`

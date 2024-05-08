@@ -76,6 +76,8 @@ func (h *HttpClientWrapper) postRequest(req *http.Request, resp *http.Response) 
 	return nil
 }
 
+// cookie
+
 func (h *HttpClientWrapper) SetCookieJar(j *cookiejar.Jar) {
 	h.client.Jar = j
 }
@@ -84,7 +86,10 @@ func (h *HttpClientWrapper) ResetCookie() {
 	h.client.Jar = new(cookiejar.Jar)
 }
 
-// todo make a url builder
+func (h *HttpClientWrapper) GetCookie(u *url.URL) Cookies {
+	return h.client.Jar.Cookies(u)
+}
+
 // http method Below
 
 func (h *HttpClientWrapper) Do(req *http.Request) (resp *http.Response, err error) {
