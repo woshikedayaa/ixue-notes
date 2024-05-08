@@ -1,0 +1,17 @@
+# config.yaml
+user:
+  account: 12345678901
+  password: *
+  # 如果设置了 encoded 之后 上面就输入你加密后的账号密码
+  # 加密见文档 这里只做登陆用
+  encoded: false
+target: # todo
+  # 需要的时间 单位 分钟
+  time: 1000
+  # 完成度 百分制
+  finish: 30
+  # 要刷的书的id 如果没有指定或者说是无效的 会在控制台手动选择
+  book_id: 123456
+# 是否自动识别验证码 如果不是自动识别就会输出一个图片 手动输入
+# 注: 识别验证码可能不太准确 正常情况推荐关闭
+auto-verify: false
