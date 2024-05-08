@@ -8,7 +8,6 @@ import (
 	"net/http/cookiejar"
 	"net/url"
 	"strings"
-	"time"
 )
 
 type PreRequestFunc func(req *http.Request) error
@@ -21,11 +20,10 @@ type HttpClientWrapper struct {
 	postRequestFunc []PostRequestFunc
 }
 
-func NewHttpClientWrapper(client *http.Client, timeout time.Duration) *HttpClientWrapper {
+func NewHttpClientWrapper(client *http.Client) *HttpClientWrapper {
 	h := new(HttpClientWrapper)
 	h.client = client
 	h.client.Jar = new(cookiejar.Jar)
-	h.client.Timeout = timeout
 	return h
 }
 
@@ -120,6 +118,6 @@ func (h *HttpClientWrapper) POST(u string, body io.Reader, contentType string) (
 	req.Header.Set("Content-Type", contentType)
 	return h.Do(req)
 }
-func (h *HttpClientWrapper) PostForm(u string, data url.Values) (resp *http.Response, err error) {
+func (h *HttpClientWrapper) POSTForm(u string, data url.Values) (resp *http.Response, err error) {
 	return h.POST(u, strings.NewReader(data.Encode()), "application/x-www-form-urlencoded")
 }

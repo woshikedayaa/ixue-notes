@@ -6,16 +6,17 @@ import (
 	"github.com/spf13/viper"
 	"log"
 	"os"
-	"time"
 )
 
 //go:embed config_full.yaml
 var configExampleFUll string
 
 type Config struct {
-	User       user   `yaml:"user"`
-	Target     target `yaml:"target"`
-	AutoVerify bool   `yaml:"auto-verify"`
+	User   user   `yaml:"user"`
+	Target target `yaml:"target"`
+
+	AutoVerify  bool `yaml:"auto-verify"`
+	HttpTimeOut int  `yaml:"http-timeout"`
 }
 
 type user struct {
@@ -25,9 +26,9 @@ type user struct {
 }
 
 type target struct {
-	Time   time.Duration `yaml:"time"`
-	Finish int           `yaml:"finish"`
-	BookID int           `yaml:"book_id"`
+	Time   int `yaml:"time"`
+	Finish int `yaml:"finish"`
+	BookID int `yaml:"book_id"`
 }
 
 var config Config
