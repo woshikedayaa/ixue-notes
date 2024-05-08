@@ -1,7 +1,7 @@
 # config.yaml
 user:
-  account: 12345678901
-  password: *
+  account: ""
+  password: ""
   # 如果设置了 encoded 之后 上面就输入你加密后的账号密码
   # 加密见文档 这里只做登陆用
   encoded: false
@@ -17,3 +17,7 @@ target: # todo
 auto-verify: false
 # 请求超时时间 单位 秒
 http-timeout: 10
+# 下面的部分不懂就不动
+base-url: "app.readoor.cn"
+
+app-id: 1544059443

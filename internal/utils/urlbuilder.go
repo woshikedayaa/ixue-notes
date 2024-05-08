@@ -32,6 +32,11 @@ func (u *HttpURLBuilder) Build() string {
 	return u.u.String()
 }
 
+func (u *HttpURLBuilder) BuildUrl() *url.URL {
+	u.u.RawQuery = u.args.Encode()
+	return u.u
+}
+
 func (u *HttpURLBuilder) AddArg(key, value string) *HttpURLBuilder {
 	u.opcnt++
 	u.args.Add(key, value)

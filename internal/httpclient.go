@@ -23,13 +23,13 @@ type HttpClientWrapper struct {
 func NewHttpClientWrapper(client *http.Client) *HttpClientWrapper {
 	h := new(HttpClientWrapper)
 	h.client = client
-	h.client.Jar = new(cookiejar.Jar)
+	h.client.Jar, _ = cookiejar.New(nil) // 这个 error 只会返回 nil .....
 	return h
 }
 
 // randomUA
 func randomUA(req *http.Request) error {
-	req.Header.Add("User-Agent", utils.RandomString(rand.Int()%20+10))
+	req.Header.Set("User-Agent", utils.RandomString(rand.Int()%20+10))
 	return nil
 }
 func (h *HttpClientWrapper) EnableRandomUA() {
@@ -38,7 +38,7 @@ func (h *HttpClientWrapper) EnableRandomUA() {
 
 // randomReferer
 func randomReferer(req *http.Request) error {
-	req.Header.Add("Referer", utils.RandomString(rand.Int()%20+10))
+	req.Header.Set("Referer", utils.RandomString(rand.Int()%20+10))
 	return nil
 }
 func (h *HttpClientWrapper) EnableRandomReferer() {
@@ -58,22 +58,14 @@ func (h *HttpClientWrapper) preRequest(req *http.Request) error {
 	for i := 0; i < len(h.preRequestFunc) && err == nil; i++ {
 		err = h.preRequestFunc[i](req)
 	}
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return err
 }
 func (h *HttpClientWrapper) postRequest(req *http.Request, resp *http.Response) error {
 	var err error
 	for i := 0; i < len(h.postRequestFunc) && err == nil; i++ {
 		err = h.postRequestFunc[i](req, resp)
 	}
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return err
 }
 
 // cookie
@@ -83,11 +75,25 @@ func (h *HttpClientWrapper) SetCookieJar(j *cookiejar.Jar) {
 }
 
 func (h *HttpClientWrapper) ResetCookie() {
-	h.client.Jar = new(cookiejar.Jar)
+	h.client.Jar, _ = cookiejar.New(nil)
 }
 
 func (h *HttpClientWrapper) GetCookie(u *url.URL) Cookies {
 	return h.client.Jar.Cookies(u)
+}
+
+func addCookies(cookies []*http.Cookie) PreRequestFunc {
+	// 这里闭包 把这个 cookie 数组其实是固定了的
+	return func(req *http.Request) error {
+		for i := 0; i < len(cookies); i++ {
+			req.AddCookie(cookies[i])
+		}
+		return nil
+	}
+}
+
+func (h *HttpClientWrapper) AddCookie(cookies []*http.Cookie) {
+	h.AppendPreRequest(addCookies(cookies))
 }
 
 // http method Below

@@ -11,14 +11,14 @@ import (
 //go:embed config_full.yaml
 var configExampleFUll string
 
-var baseURL = "app.readoor.cn"
-
 type Config struct {
 	User   user   `yaml:"user"`
 	Target target `yaml:"target"`
 
-	AutoVerify  bool `yaml:"auto-verify"`
-	HttpTimeOut int  `yaml:"http-timeout"`
+	AutoVerify  bool   `yaml:"auto-verify"`
+	HttpTimeOut int    `yaml:"http-timeout"`
+	BaseUrl     string `yaml:"base-url"`
+	AppID       string `yaml:"app-id"`
 }
 
 type user struct {
@@ -63,7 +63,7 @@ func ConfigInit() error {
 		return errors.New("config.yaml is empty")
 	}
 	// 最后开始正式读配置文件
-	viper.SetConfigFile("config")
+	viper.SetConfigFile("config.yaml")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
 	err = viper.ReadInConfig()
