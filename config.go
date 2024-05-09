@@ -11,6 +11,8 @@ import (
 //go:embed config_full.yaml
 var configExampleFUll string
 
+var maq = "_uid,,_appId,1544059443,_cid,89,_isMobile,,_isWeixin,9.1,_accessType,,_keyValue,,_appver,2.29.1,_apiver,1.0"
+
 type Config struct {
 	User   user   `yaml:"user"`
 	Target target `yaml:"target"`
@@ -23,9 +25,11 @@ type Config struct {
 }
 
 type user struct {
-	account  string `yaml:"account"`
-	password string `yaml:"password"`
-	encoded  bool   `yaml:"encoded"`
+	Account   string `yaml:"account"`
+	Password  string `yaml:"password"`
+	Encoded   bool   `yaml:"encoded"`
+	Csrf      string `yaml:"csrf"`
+	SessionID string `yaml:"session-id"`
 }
 
 type target struct {

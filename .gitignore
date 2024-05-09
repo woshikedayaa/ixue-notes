@@ -23,3 +23,5 @@ go.work
 config.yaml
 
 capture.png
+
+test/
