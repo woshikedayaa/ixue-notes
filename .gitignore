@@ -25,3 +25,5 @@ config.yaml
 capture.png
 
 test/
+
+.idea
