@@ -108,7 +108,7 @@ func getBookDetailedInfo(availableBookList []models.SimpleBook) ([]models.Detail
 		book := models.DetailedBook{}
 		log.Printf("POST %s for %s\n", detailedBookUrl, availableBookList[i].BookIDEncrypt)
 		data := url.Values{}
-		data.Add("csrf_app_name", csrf)
+		data.Add("csrf_app_name", config.User.Csrf)
 		data.Add("book_id", availableBookList[i].BookIDEncrypt)
 		resp, err = client.POSTForm(detailedBookUrl, data)
 		if err != nil {

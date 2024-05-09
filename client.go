@@ -8,9 +8,6 @@ import (
 
 var client *internal.HttpClientWrapper
 
-var csrf = ""
-var vpappSession = ""
-
 func HttpClientInit() {
 	hpc := http.Client{
 		Transport: &http.Transport{

@@ -28,11 +28,21 @@ func (u *HttpURLBuilder) Build() string {
 	if u.opcnt == 0 {
 		return u.raw
 	}
+	for k, v := range u.u.Query() {
+		for _, vv := range v {
+			u.args.Add(k, vv)
+		}
+	}
 	u.u.RawQuery = u.args.Encode()
 	return u.u.String()
 }
 
 func (u *HttpURLBuilder) BuildUrl() *url.URL {
+	for k, v := range u.u.Query() {
+		for _, vv := range v {
+			u.args.Add(k, vv)
+		}
+	}
 	u.u.RawQuery = u.args.Encode()
 	return u.u
 }

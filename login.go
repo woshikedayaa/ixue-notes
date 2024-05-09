@@ -27,14 +27,18 @@ func LoginToIXue() error {
 				AddArg("s_id", config.AppID)
 		account  = config.User.Account
 		password = config.User.Password
+		code     = ""
 	)
-
+	account, password, code, err = getUserInfo()
+	if err != nil {
+		return err
+	}
 	// 组织数据
 	form := url.Values{}
 	form.Add("account", account)
 	form.Add("password", password)
-	form.Add("csrf_app_name", csrf)
-
+	form.Add("csrf_app_name", config.User.Csrf)
+	form.Add("verify", code)
 	// 开始登陆
 	log.Printf("POST %s\n", loginUrl.Build())
 	resp, err = client.POSTForm(loginUrl.Build(), form)
@@ -61,8 +65,8 @@ func LoginToIXue() error {
 
 func getUserInfo() (account string, password string, captureCode string, err error) {
 
-	if len(account) == 0 || len(password) == 0 {
-		if len(account) == 0 {
+	if len(config.User.Account) == 0 || len(config.User.Password) == 0 {
+		if len(config.User.Account) == 0 {
 			fmt.Printf("请输入账号:")
 			_, err = fmt.Scanf("%s", &account)
 			if err != nil {
@@ -75,8 +79,10 @@ func getUserInfo() (account string, password string, captureCode string, err err
 			return "", "", "", err
 		}
 		config.User.Encoded = false
+	} else {
+		account = config.User.Account
+		password = config.User.Password
 	}
-
 	var (
 		code    = make(chan string)
 		errChan = make(chan error)
@@ -163,7 +169,7 @@ func InitAccessIXue() error {
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("LoginToIXue: status code %d", resp.StatusCode)
 	}
-	csrf = client.GetCookie(u.BuildUrl()).Find("csrf_cookie_name").Value
-	vpappSession = client.GetCookie(u.BuildUrl()).Find("vpapp_session").Value
+	config.User.Csrf = client.GetCookie(u.BuildUrl()).Find("csrf_cookie_name").Value
+	config.User.SessionID = client.GetCookie(u.BuildUrl()).Find("vpapp_session").Value
 	return nil
 }
