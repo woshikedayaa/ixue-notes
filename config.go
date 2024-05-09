@@ -15,11 +15,11 @@ type Config struct {
 	User   user   `yaml:"user"`
 	Target target `yaml:"target"`
 
-	AutoVerify     bool   `yaml:"auto-verify"`
-	VerifyTryCount int    `yaml:"verify-try-count"`
-	HttpTimeOut    int    `yaml:"http-timeout"`
-	BaseUrl        string `yaml:"base-url"`
-	AppID          string `yaml:"app-id"`
+	// why mapstructure
+	// see : https://gist.github.com/chazcheadle/45bf85b793dea2b71bd05ebaa3c28644
+	HttpTimeOut int    `mapstructure:"http-timeout"`
+	BaseUrl     string `mapstructure:"base-url"`
+	AppID       string `mapstructure:"app-id"`
 }
 
 type user struct {

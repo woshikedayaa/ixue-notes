@@ -39,4 +39,8 @@ func main() {
 		},
 	})
 	err = LoginToIXue()
+	if err != nil {
+		panic(err)
+	}
+	select {}
 }
