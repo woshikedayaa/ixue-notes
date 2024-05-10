@@ -20,7 +20,8 @@ Args:
 | KEY           | Description                 | Example                |
 | ------------- | --------------------------- | ---------------------- |
 | csrf_app_name | 与 csrf-cookie-name 值相同      | 0adff426ccea9e3173b... |
-| course        | 这个是这本书的 book_id base64 后的结果 | MzE0NDY=               |
+| course        | 这个是这本书的 book_id base64 后的结果 | MzE0NDY=               |  
+
 Response:
 会在响应头添加 2 个 Set-Cookies 头
 第一个是删除已有的 第二个是添加新的
@@ -39,7 +40,8 @@ Args:
 | cl    | 解析出来 是一个下划线分开的 前面的数字是book_id 后面？ | MzE0NDZfNjg3NTQ= |
 | ci    | company_id                       | 12233            |
 | pid   | 可以研究一下获取书的api 这个是 data-pid 标签的   | 122622           |
-| tid   | 同上 data-training_id              | 10418            |
+| tid   | 同上 data-training_id              | 10418            |  
+
 Response:
 返回一个html页面 我们要从这个页面提取信息
 主要是给后面提交用
@@ -65,7 +67,8 @@ Body:
 | -------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | csrf_app_name        | 与 csrf-cookie-name 值相同                     | 0adff426ccea9e3173b...                                                                                                                                                                                                                                                                                     |
 | previousMaterialList | 还记得之前说记下来请求记录吗 这个就是要用的 它是一个json 发送的是这个书的内容 | [  <br>    {  <br>        "ui": "",  <br>        "bi": "",  <br>        "bci": "",  <br>        "bt": "",  <br>        "bst": "",  <br>        "cui": ,  <br>        "cpi": ,  <br>        "mid": "",  <br>        "mi": ,  <br>        "tm":   <br>    }  <br>]                                           |
-| materialRecordList   | 和上一个差不多 只多了几个键 想要知道是什么可以去翻翻网页端的代码 这些键都是缩写  | [  <br>    {  <br>        "ui": "",  <br>        "bi": "",  <br>        "bci": "",  <br>        "bt": "",  <br>        "bst": "",  <br>        "lid": "",  <br>        "li": ,  <br>        "lt": "",  <br>        "mp": ,  <br>        "msp": ,  <br>        "md": ,  <br>        "fs":  <br>    }  <br>] |
+| materialRecordList   | 和上一个差不多 只多了几个键 想要知道是什么可以去翻翻网页端的代码 这些键都是缩写  | [  <br>    {  <br>        "ui": "",  <br>        "bi": "",  <br>        "bci": "",  <br>        "bt": "",  <br>        "bst": "",  <br>        "lid": "",  <br>        "li": ,  <br>        "lt": "",  <br>        "mp": ,  <br>        "msp": ,  <br>        "md": ,  <br>        "fs":  <br>    }  <br>] |  
+
 Response:
 没啥返回的
 
@@ -82,7 +85,8 @@ Body:
 | url           | 你开始获取信息页面的url                                                                                                                | https://app.readoor.cn/app/qb/spd/1544059443....                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | referrer      | 前面获取的                                                                                                                        | https://app.readoor.cn/app/qb/spd/1544059443....                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | system        |                                                                                                                              | 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| uidffqbsub    | 独立id                                                                                                                         | Bg0BAFxRWlQBAFN.....                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| uidffqbsub    | 独立id                                                                                                                         | Bg0BAFxRWlQBAFN.....                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |  
+
 Response:
 这里没保存下来 大概就是会返回一个实际消耗的时间 和状态 还有时间这些
 如果你按标准流程来了 应该是可以记录成功的

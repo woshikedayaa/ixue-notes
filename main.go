@@ -51,7 +51,7 @@ func main() {
 	//}
 	//log.Printf("准备刷的书是 %s 准备刷的时间是 %dmin\n", TargetBookInfo.Data.BookName, config.Target.Time)
 	// 3：55
-	train(60, 10)
+	train(3500, 10)
 	log.Println("学习完毕!")
 	select {}
 }

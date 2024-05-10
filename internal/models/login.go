@@ -21,7 +21,7 @@ type UserDetailedInfo struct {
 		WxUserType        string        `json:"wx_user_type"`
 		WxUserPn          string        `json:"wx_user_pn"`
 		UserRealName      string        `json:"user_real_name"`
-		UserInfo          []interface{} `json:"user_info"`
+		UserInfo          interface{}   `json:"user_info"`
 		UserGrade         interface{}   `json:"user_grade"`
 		VipType           interface{}   `json:"vip_type"`
 		VipStartTime      interface{}   `json:"vip_start_time"`

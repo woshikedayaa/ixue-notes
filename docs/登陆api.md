@@ -17,7 +17,8 @@ Body:
 | account       | 这个是加密后的数据 原数据可以是手机号或者邮箱 这里使用的RSA 加密 详细看 一些关于i学网站的概念.md | gaGpivTFpnEx88...      |
 | password      | 这个也是加密后的数据 输入的是密码                                      | V5F2X6+CBEduD...       |
 | verify        | 这个也是加密后的数据 输入的是验证码                                     | oaqrZ6p3jeBqdd....     |
-| csrf_app_name | 与 csrf-cookie-name 值相同                                 | 0adff426ccea9e3173b... |
+| csrf_app_name | 与 csrf-cookie-name 值相同                                 | 0adff426ccea9e3173b... |  
+
 Response :
 - 成功登陆
 返回一个json字符串 包括了这个账号的信息 具体每个键什么意识 可以自己去请求一下 一下就能看懂
@@ -68,24 +69,25 @@ Response :
 也是返回json 只不过结构不一样了
 ```json
 {  
-    "distributor_id": "",  
-    "promotion_id": "",  
-    "user": {  
-        "user_identifier": "",  
-        "user_id": ""  
-    },  
-    "status": -1,  
-    "errorMessage": {  
-        "account": 1111 
-    },  
-    "time": 0 
+    "distributor_id":"",  
+    "promotion_id":"",  
+    "user":{  
+        "user_identifier":"",  
+        "user_id":""  
+    },  
+    "status":-1,  
+    "errorMessage":{  
+        "account":1111 
+    },  
+    "time":0 
 }
 ```
 
-其中 errorMessage.account 是错误代码 这里只总结两个
-1111 验证码错误
-1110 账密错误
-
+其中 errorMessage.account 是错误代码 这里只总结两个  
+1111 验证码错误  
+1110 账密错误  
+2024-5-10  
+这里补个坑 这个接口的 user_info键 有可能返回一个数组 也有可能是一个对象 总之有坑  
 ### 获取验证码
 GET https://app.readoor.cn/app/napp/getImageCode/login/4/80/40
 Args:
@@ -93,7 +95,8 @@ Args:
 | KEY  | Description     | Example            |
 | ---- | --------------- | ------------------ |
 | s_id | appid           | 1544059443         |
-| rand | 一个低于1的浮点数 共16 位 | 0.6082343041477555 |
+| rand | 一个低于1的浮点数 共16 位 | 0.6082343041477555 |  
+
 Response:
 - 成功
 会返回 一个图形验证码 注意 : 随机数的参数和验证码无关 但是最好还是随机一下
